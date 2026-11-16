@@ -1,4 +1,3 @@
-
 enum Genre {
   novel,
   history,
@@ -7,7 +6,7 @@ enum Genre {
 }
 
 extension GenreExtension on Genre {
-  String get title {
+  String get label {
     switch (this) {
       case Genre.novel:
         return 'Վեպ';

@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import '../models/book.dart';
+import 'star_rating.dart';
 
 class BookTile extends StatelessWidget {
   final Book book;
@@ -24,23 +24,25 @@ class BookTile extends StatelessWidget {
       title: Text(
         book.title,
         style: TextStyle(
-          decoration: book.isRead
-              ? TextDecoration.lineThrough
-              : TextDecoration.none,
+          decoration:
+              book.isRead ? TextDecoration.lineThrough : TextDecoration.none,
         ),
       ),
-      subtitle: Text(
-        '${book.author} • ${book.genre.title}',
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('${book.author} • ${book.genre.label}'),
+          if (book.rating > 0)
+            StarRating(
+              rating: book.rating,
+              size: 17,
+            ),
+        ],
       ),
-      trailing: book.rating > 0
-          ? Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(Icons.star, color: Colors.amber),
-                Text('${book.rating}'),
-              ],
-            )
-          : const Icon(Icons.arrow_forward_ios, size: 16),
+      trailing: const Icon(
+        Icons.arrow_forward_ios,
+        size: 16,
+      ),
       onTap: onTap,
     );
   }
